@@ -1,0 +1,27 @@
+// invoice := tgbotapi.NewInvoice(update.Message.Chat.ID, "Test invoice", "description here", "custom_payload",
+// 	"284685063:TEST:MDBiOTc5MzRmZWU4", "start_param", "USD", []tgbotapi.LabeledPrice{{Label: "USD", Amount: 200}})
+// invoice.SuggestedTipAmounts = []int{1, 3}
+// invoice.MaxTipAmount = 100
+
+// bot.Send(invoice)
+
+// arr := []tgbotapi.InlineKeyboardButton{}
+// arr = append(arr, tgbotapi.NewInlineKeyboardButtonSwitch("Start", "start_param"))
+// msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Hello, I'm a bot")
+// msg.ReplyMarkup = tgbotapi.NewInlineKeyboardMarkup(arr)
+// bot.Send(msg)
+// if update.CallbackQuery != nil {
+// }
+
+
+
+				callback := tgbotapi.NewCallbackWithAlert(update.CallbackQuery.ID, "Hello")
+				bot.Send(callback)
+
+else if update.PreCheckoutQuery != nil {
+	pca := tgbotapi.PreCheckoutConfig{
+		OK:                 true,
+		PreCheckoutQueryID: update.PreCheckoutQuery.ID,
+	}
+	bot.Request(pca)
+} 

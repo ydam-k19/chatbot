@@ -1,0 +1,35 @@
+import Layout from '../../components/Layout/Layout';
+import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
+import getConfig from 'next/config';
+
+export default function RegisterAdmin() {
+    const { SERVER_URL } = getConfig();
+    const router = useRouter();
+    const { chatID, name } = router.query;
+    const [code, setCode] = useState();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        return router.push({
+            pathname: SERVER_URL + '/register/admin',
+            query: {
+                chat_id: chatID,
+                name: name,
+                code: code,
+            },
+        });
+    };
+    const handleChange = (e) => {
+        setCode(e.target.value);
+    };
+
+    return (
+        <Layout>
+            <form onSubmit={handleSubmit} method="post">
+                <input type="text" name="code" value={code} onChange={handleChange} placeholder="Enter private code:" />
+                <button type="submit">Submit</button>
+            </form>
+        </Layout>
+    );
+}
